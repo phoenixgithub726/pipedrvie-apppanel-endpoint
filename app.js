@@ -70,10 +70,11 @@ app.get("/error", function  (req, res) {
   }
 });
 app.get("/", async function  (req, res) {
+
   try {
     const user = await lib.UsersController.getCurrentUserData();
-    console.log("response", user.data)
-    res.json(user.data);
+    console.log("response", user)
+    res.json({"data":user.data});
     // res.send('<a href="/connect">Connect to Xero</a>');  
   } catch (error) {
     res.json(error);
