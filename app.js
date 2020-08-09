@@ -70,13 +70,14 @@ app.get("/error", function  (req, res) {
   }
 });
 app.get("/", async function  (req, res) {
-  try {
-    const user = await lib.UsersController.getCurrentUserData();
-    res.json(user);
-    // res.send('<a href="/connect">Connect to Xero</a>');  
-  } catch (error) {
-    res.json(error);
-  }
+  res.json({"res":"test result"})
+  // try {
+  //   const user = await lib.UsersController.getCurrentUserData();
+  //   res.json(user);
+  //   // res.send('<a href="/connect">Connect to Xero</a>');  
+  // } catch (error) {
+  //   res.json(error);
+  // }
 });
 
 const PORT = process.env.PORT || 5000;
