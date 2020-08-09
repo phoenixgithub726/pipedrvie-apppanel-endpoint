@@ -71,7 +71,7 @@ app.get("/error", function  (req, res) {
 });
 // app.get("/", async function  (req, res) {
 app.get("/", function  (req, res) {
-  constresponse = {
+  const response = {
     data:
       { id: 1, name: "John", email: "john.doe@pipedrive.com", date: '2019-10-01T19:20:11+02:00' }
   }
