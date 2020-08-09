@@ -27,9 +27,10 @@ lib.Configuration.apiToken = 'cc638af3ea2783059aae7e32b5b80e34c1f0d1f4';
 
 
 const oAuthManager = lib.OAuthManager;
-lib.Configuration.oAuthClientId = 'a0f664cbd953c9b2'; // OAuth 2 Client ID
-lib.Configuration.oAuthClientSecret = 'b4af2a4024bd590af337472559b1702dc8ea51c1'; // OAuth 2 Client Secret
-lib.Configuration.oAuthRedirectUri = 'http://localhost:5000/callback'; // OAuth 2 Redirection endpoint or Callback Uri
+lib.Configuration.oAuthClientId = 'de96c7b1775cbd03'; // OAuth 2 Client ID
+lib.Configuration.oAuthClientSecret = '96e47bc6458c799b36a4115aafdeabdb65075c81'; // OAuth 2 Client Secret
+lib.Configuration.oAuthRedirectUri = 'http://104.248.2.159:5000/callback'; // OAuth 2 Redirection endpoint or Callback Uri
+// lib.Configuration.oAuthRedirectUri = 'http://localhost:5000/callback'; // OAuth 2 Redirection endpoint or Callback Uri
 
 
 app.get('/', async (req, res) => {
@@ -38,11 +39,11 @@ app.get('/', async (req, res) => {
       // now make API calls as required
       // client will automatically refresh the token when it expires and call the token update callback
       const user = await lib.UsersController.getCurrentUserData();
-
+      console.log("user data", user)
       res.send(user);
   } else {
       const authUrl = oAuthManager.buildAuthorizationUrl();
-      alert(authUrl)
+      console.log(authUrl)
       res.redirect(authUrl);
   }
 });
@@ -50,11 +51,13 @@ app.get('/', async (req, res) => {
 app.get('/callback', (req, res) => {
   const authCode = req.query.code;
   const promise = oAuthManager.authorize(authCode);
+  console.log(authCode, promise)
 
   promise.then(() => {
       req.session.token = lib.Configuration.oAuthToken;
       res.redirect('/');
   }, (exception) => {
+    console.error(exception)
       res.redirect('/error')
       // error occurred, exception will be of type lib/Exceptions/OAuthProviderException
   });
