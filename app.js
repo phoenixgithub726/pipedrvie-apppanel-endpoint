@@ -69,16 +69,21 @@ app.get("/error", function  (req, res) {
     res.json(error);
   }
 });
-app.get("/", async function  (req, res) {
-
-  try {
-    const user = await lib.UsersController.getCurrentUserData();
-    console.log("data:",user.data)
-    res.json({"data":user.data});
-    // res.send('<a href="/connect">Connect to Xero</a>');  
-  } catch (error) {
-    res.json(error);
+// app.get("/", async function  (req, res) {
+app.get("/", function  (req, res) {
+  constresponse = {
+    data:
+      { id: 1, name: "John", email: "john.doe@pipedrive.com", date: '2019-10-01T19:20:11+02:00' }
   }
+  res.json(response);
+  // try {
+  //   const user = await lib.UsersController.getCurrentUserData();
+  //   console.log("data:",user.data)
+  //   res.json({"data":user.data});
+  //   // res.send('<a href="/connect">Connect to Xero</a>');  
+  // } catch (error) {
+  //   res.json(error);
+  // }
 });
 
 const PORT = process.env.PORT || 5000;

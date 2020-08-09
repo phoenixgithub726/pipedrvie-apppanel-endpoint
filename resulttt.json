@@ -1,46 +1,7 @@
 {
-    "success": false,
-    "error": "The response from the server is not according to the structure",
-    "data": {
-        "errors": [
-            {
-                "keyword": "additionalProperties",
-                "dataPath": "",
-                "schemaPath": "#/additionalProperties",
-                "params": {
-                    "additionalProperty": "id"
-                },
-                "message": "should NOT have additional properties"
-            }
-        ],
-        "response": {
-            "id": 11633427,
-            "name": "Dailer",
-            "default_currency": "AUD",
-            "locale": "en_AU",
-            "lang": 1,
-            "email": "dailer.hurtado0321@gmail.com",
-            "phone": null,
-            "activated": true,
-            "last_login": "2020-08-09 05:52:42",
-            "created": "2020-07-22 03:10:55",
-            "modified": "2020-08-09 05:52:42",
-            "signup_flow_variation": null,
-            "has_created_company": false,
-            "is_admin": 1,
-            "active_flag": true,
-            "timezone_name": "America/Los_Angeles",
-            "timezone_offset": "-08:00",
-            "role_id": 1,
-            "icon_url": null,
-            "is_you": true,
-            "company_id": 3378596,
-            "company_name": "Certa Pty Ltd",
-            "company_domain": "certa",
-            "language": {
-                "language_code": "en",
-                "country_code": "US"
-            }
-        }
-    }
+  data: [
+    { id: 1, header: "User #1", name: "John", email: "john.doe@pipedrive.com", date: '2019-10-01T19:20:11+02:00' },
+    { id: 2, header: "User #2", name: "Jane", email: "jane.doe@pipedrive.com", date: null },
+    { id: 3, header: "User #3", name: "Tim", email: "tim.doe@pipedrive.com", date: '2019-10-01T19:20:11+02:00' }
+  	]
 }
