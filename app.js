@@ -39,7 +39,7 @@ lib.Configuration.oAuthRedirectUri = 'http://localhost:5000/callback'; // OAuth 
 //       // now make API calls as required
 //       // client will automatically refresh the token when it expires and call the token update callback
 //       const user = await lib.UsersController.getCurrentUserData();
-//       console.log("user data", user)
+//       console.log("user data", user.data)
 //       res.json(user);
 //   } else {
 //       const authUrl = oAuthManager.buildAuthorizationUrl();
@@ -72,7 +72,7 @@ app.get("/error", function  (req, res) {
 app.get("/", async function  (req, res) {
   try {
     const user = await lib.UsersController.getCurrentUserData();
-    res.json(user);
+    res.json(user.data);
     // res.send('<a href="/connect">Connect to Xero</a>');  
   } catch (error) {
     res.json(error);
