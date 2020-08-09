@@ -15,9 +15,17 @@
     "email": {
       "$ref": "#/definitions/email"
     },
-    "date": {
-      "label": "Created",
-      "$ref": "#/definitions/date-time"
+    "phone": {
+      "$ref": "#/definitions/text"
+    },
+    "last_login": {
+      "$ref": "#/definitions/text"
+    },
+    "company_name": {
+      "$ref": "#/definitions/text"
+    },
+    "company_domain": {
+      "$ref": "#/definitions/text"
     }
   }
 }

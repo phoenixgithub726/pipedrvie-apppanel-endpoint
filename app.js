@@ -30,7 +30,7 @@ lib.Configuration.oAuthClientId = "de96c7b1775cbd03"; // OAuth 2 Client ID
 lib.Configuration.oAuthClientSecret =
   "96e47bc6458c799b36a4115aafdeabdb65075c81"; // OAuth 2 Client Secret
 // lib.Configuration.oAuthRedirectUri = 'http://104.248.2.159:5000/callback'; // OAuth 2 Redirection endpoint or Callback Uri
-lib.Configuration.oAuthRedirectUri = "http://localhost:5000/callback"; // OAuth 2 Redirection endpoint or Callback Uri
+lib.Configuration.oAuthRedirectUri = "http://localhost:5000/pipedrive/callback"; // OAuth 2 Redirection endpoint or Callback Uri
 
 // app.get('/', async (req, res) => {
 //   if (req.session.token !== null && req.session.token !== undefined) {
@@ -47,7 +47,7 @@ lib.Configuration.oAuthRedirectUri = "http://localhost:5000/callback"; // OAuth 
 //   }
 // });
 
-app.get("/callback", (req, res) => {
+app.get("/pipedrive/callback", (req, res) => {
   const authCode = req.query.code;
   const promise = oAuthManager.authorize(authCode);
   console.log(authCode, promise);
@@ -73,15 +73,26 @@ app.get("/error", function (req, res) {
 });
 // app.get("/", async function  (req, res) {
 app.get("/", async function (req, res) {
-  const response = {
-    data: {
-      id: 1,
-      name: "John",
-      email: "john.doe@pipedrive.com",
-      date: "2019-10-01T19:20:11+02:00",
-      company_name: "Certa Pty Ltd",
-      company_domain: "certa"
-    }
+  // const response = {
+  //   data: {
+  //     id: 1,
+  //     name: "John",
+  //     email: "john.doe@pipedrive.com",
+  //     date: "2019-10-01T19:20:11+02:00",
+  //   }
+  // };
+  const balance = {
+    data: [
+      { status: "AccountsReceivable", 
+        oustand: '1540.0', 
+        overdue: 1540.0 
+      },
+      {
+        status: "AccountsPayable",
+        oustand: '0.0',
+        overdue: '0.0',
+      },
+    ],
   };
   res.json(response);
   // try {

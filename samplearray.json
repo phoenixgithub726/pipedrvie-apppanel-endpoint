@@ -1,0 +1,22 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "status",
+      "oustand",
+      "overdue"
+    ],
+    "properties": {
+      "status": {
+        "$ref": "#/definitions/header"
+      },
+      "oustand": {
+        "$ref": "#/definitions/text"
+      },
+      "overdue": {
+        "$ref": "#/definitions/text"
+      }
+    }
+  }
+}
