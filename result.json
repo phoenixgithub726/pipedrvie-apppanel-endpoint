@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "data": {
+    "id": 11633427,
+    "name": "Dailer",
+    "default_currency": "AUD",
+    "locale": "en_AU",
+    "lang": 1,
+    "email": "dailer.hurtado0321@gmail.com",
+    "phone": null,
+    "activated": true,
+    "last_login": "2020-08-07 09:28:32",
+    "created": "2020-07-22 03:10:55",
+    "modified": "2020-08-07 09:28:32",
+    "signup_flow_variation": null,
+    "has_created_company": false,
+    "is_admin": 1,
+    "active_flag": true,
+    "timezone_name": "America/Los_Angeles",
+    "timezone_offset": "-08:00",
+    "role_id": 1,
+    "icon_url": null,
+    "is_you": true,
+    "company_id": 3378596,
+    "company_name": "Certa Pty Ltd",
+    "company_domain": "certa",
+    "language": {
+      "language_code": "en",
+      "country_code": "US"
+    }
+  }
+}

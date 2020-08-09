@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "required": [
+    "id",
+    "company_id",
+    "name",
+    "company_name",
+    "email"
+  ],
+  "properties": {
+    "id": {
+      "$ref": "#/definitions/numerical"
+    },
+    "name": {
+      "$ref": "#/definitions/text"
+    },
+    "email": {
+      "$ref": "#/definitions/email"
+    },
+    "company_name": {
+      "$ref": "#/definitions/text"
+    },
+    "company_id": {
+      "$ref": "#/definitions/numerical"
+    },
+    "date": {
+      "label": "Created",
+      "$ref": "#/definitions/date-time"
+    },
+    "balance": {
+      "$ref": "#/definitions/currency"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "name",
+      "email"
+    ],
+    "properties": {
+      "header": {
+        "$ref": "#/definitions/header"
+      },
+      "id": {
+        "$ref": "#/definitions/numerical"
+      },
+      "name": {
+        "$ref": "#/definitions/text"
+      },
+      "email": {
+        "label": "Email",
+        "$ref": "#/definitions/email"
+      },
+      "date": {
+        "label": "Created",
+        "$ref": "#/definitions/date-time"
+      },
+      "balance": {
+        "$ref": "#/definitions/currency"
+      }
+    }
+  }
+}

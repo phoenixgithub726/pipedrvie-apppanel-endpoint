@@ -1,0 +1,19 @@
+{
+  "name": "xero-api-app",
+  "version": "0.0.1",
+  "description": "Simple XERO api for accounting data in pipedrive",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "cookie-session": "^1.4.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "pipedrive": "^10.4.3",
+    "xero-node": "^4.7.6"
+  }
+}
