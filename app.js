@@ -73,7 +73,7 @@ app.get("/", async function  (req, res) {
 
   try {
     const user = await lib.UsersController.getCurrentUserData();
-    console.log("response", user)
+    console.log("data:",user.data)
     res.json({"data":user.data});
     // res.send('<a href="/connect">Connect to Xero</a>');  
   } catch (error) {
