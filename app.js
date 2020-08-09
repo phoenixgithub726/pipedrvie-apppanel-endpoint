@@ -40,7 +40,7 @@ app.get('/', async (req, res) => {
       // client will automatically refresh the token when it expires and call the token update callback
       const user = await lib.UsersController.getCurrentUserData();
       console.log("user data", user)
-      res.send(user);
+      res.json(user);
   } else {
       const authUrl = oAuthManager.buildAuthorizationUrl();
       console.log(authUrl)
