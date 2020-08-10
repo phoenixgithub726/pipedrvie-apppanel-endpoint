@@ -3,12 +3,11 @@
   "items": {
     "type": "object",
     "required": [
-      "status",
       "oustand",
       "overdue"
     ],
     "properties": {
-      "status": {
+      "header": {
         "$ref": "#/definitions/header"
       },
       "oustand": {
