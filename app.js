@@ -94,7 +94,8 @@ app.get("/", async function (req, res) {
       },
     ],
   };
-  res.json(response);
+  console.log(balance)
+  res.json(balance);
   // try {
   //   const user = await lib.UsersController.getCurrentUserData();
   //   console.log({data: user.data})
