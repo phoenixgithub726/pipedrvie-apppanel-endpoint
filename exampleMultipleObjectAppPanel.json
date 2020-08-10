@@ -8,11 +8,11 @@
       "email"
     ],
     "properties": {
-      "header": {
-        "$ref": "#/definitions/header"
-      },
       "id": {
         "$ref": "#/definitions/numerical"
+      },
+        "header": {
+        "$ref": "#/definitions/header"
       },
       "name": {
         "$ref": "#/definitions/text"
@@ -24,9 +24,6 @@
       "date": {
         "label": "Created",
         "$ref": "#/definitions/date-time"
-      },
-      "balance": {
-        "$ref": "#/definitions/currency"
       }
     }
   }

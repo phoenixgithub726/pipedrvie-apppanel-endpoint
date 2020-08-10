@@ -81,21 +81,29 @@ app.get("/", async function (req, res) {
   //     date: "2019-10-01T19:20:11+02:00",
   //   }
   // };
-  const balance = {
+  
+  // const response = {
+  //   data: [
+  //     { status: "AccountsReceivable", 
+  //       oustand: '1540.0', 
+  //       overdue: 1540.0 
+  //     },
+  //     {
+  //       status: "AccountsPayable",
+  //       oustand: '0.0',
+  //       overdue: '0.0',
+  //     },
+  //   ],
+  // };
+  const response ={
     data: [
-      { status: "AccountsReceivable", 
-        oustand: '1540.0', 
-        overdue: 1540.0 
-      },
-      {
-        status: "AccountsPayable",
-        oustand: '0.0',
-        overdue: '0.0',
-      },
-    ],
-  };
-  console.log(balance)
-  res.json(balance);
+      { id: 1, header: "User #1", name: "John", email: "john.doe@pipedrive.com", date: '2019-10-01T19:20:11+02:00' },
+      { id: 2, header: "User #2", name: "Jane", email: "jane.doe@pipedrive.com", date: null },
+      { id: 3, header: "User #3", name: "Tim", email: "tim.doe@pipedrive.com", date: '2019-10-01T19:20:11+02:00' }
+      ]
+  }
+  console.log(response)
+  res.json(response);
   // try {
   //   const user = await lib.UsersController.getCurrentUserData();
   //   console.log({data: user.data})
