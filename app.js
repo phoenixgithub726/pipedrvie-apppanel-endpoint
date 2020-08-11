@@ -82,6 +82,11 @@ app.get("/", async function (req, res) {
   //   }
   // };
   
+//  This is the static sample data for pipedrive app panel.
+// This si the app apnel endpoint.
+// Now we have to get data from xero and send data with this format 
+// let's see the xero works.
+
   const response = {
     data: [
       { header: "AccountsReceivable", 
@@ -95,6 +100,7 @@ app.get("/", async function (req, res) {
       },
     ],
   };
+
   // const response ={
   //   data: [
   //     { id: 1, header: "User #1", name: "John", email: "john.doe@pipedrive.com", date: '2019-10-01T19:20:11+02:00' },
