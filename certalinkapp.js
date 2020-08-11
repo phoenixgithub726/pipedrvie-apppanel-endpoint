@@ -79,11 +79,11 @@ app.get("/pipedrive/callback", function (req, res, next) {
   promise.then(
     () => {
       req.session.token = lib.Configuration.oAuthToken;
-      res.redirect("/");
+      res.redirect("/certalinkapp/");
     },
     (exception) => {
       console.error(exception);
-      res.redirect("/error");
+      res.redirect("/certalinkapp/error");
       // error occurred, exception will be of type lib/Exceptions/OAuthProviderException
     }
   );
@@ -150,10 +150,10 @@ app.get("/xero/callback", async function (req, res, next) {
     // req.session.xeroTenantId = xero.tenantIds[0];
     req.session.xeroTenantId = xero.tenantIds;
 
-    res.redirect("/contacts");
+    res.redirect("/certalinkapp/contacts");
   } catch (error) {
     console.error(error);
-    res.redirect("/xero");
+    res.redirect("/certalinkapp/xero");
     // let balances = [
     //   { header: "AccountsReceivable", oustand: "Failed in Callback", overdue: "Failed in Callback" },
     //   { header: "AccountsReceivable", oustand: "Connection Failed", overdue: "Connection Failed" },
