@@ -35,7 +35,12 @@ lib.Configuration.oAuthClientSecret = config.PIPEDRIVE.SECRET_ID;
 // lib.Configuration.oAuthRedirectUri = 'http://104.248.2.159:5000/callback'; // OAuth 2 Redirection endpoint or Callback Uri
 lib.Configuration.oAuthRedirectUri = config.PIPEDRIVE.REDIRECT_URI;
 
-app.get("/", async function (req, res) {
+app.get("/", function (req, res) {
+  res.redirect("/certalinkapp/response");
+});
+
+/** this request is for testing redirect and return value to app panel */
+app.get("/response", async function (req, res) {
   /**
    * @Json Strucutre
    * {
@@ -71,6 +76,7 @@ app.get("/", async function (req, res) {
   console.log(response);
   res.json(response);
 });
+
 app.get("/pipedrive/callback", function (req, res, next) {
   const authCode = req.query.code;
   const promise = oAuthManager.authorize(authCode);
@@ -171,8 +177,6 @@ app.get("/contacts", async function (req, res) {
   try {
     req.session.allTenants = xero._tenants;
     req.session.activeTenant = xero._tenants[0];
-    
-
     // const response = await xero.accountingApi.getContacts(
     //   xero._tenants[0].tenantId
     // );
