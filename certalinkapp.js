@@ -180,8 +180,6 @@ app.get("/contacts", async function (req, res) {
       xero._tenants[0].tenantId, undefined,  'name = "Apex Wiring Solutions Pty Ltd"'
     );
     console.log("_tenants[0]", xero._tenants[0].tenantName)
-    console.log("_tenants[1]", xero._tenants[1].tenantName)
-    console.log("_tenants[2]", xero._tenants[2].tenantName)
 
     const data = Contacts.getBalanceData(response.body.contacts)
     console.log("responsedata before formate--->", response.body.contacts)

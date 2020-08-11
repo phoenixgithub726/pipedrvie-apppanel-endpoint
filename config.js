@@ -35,6 +35,7 @@ const XERO = {
     REDIRECT_URI : "https://server.certalink.com/certalinkapp/xero/callback",
     SCOPE : "offline_access openid profile email accounting.transactions accounting.transactions.read accounting.reports.read accounting.journals.read accounting.settings accounting.settings.read accounting.contacts accounting.contacts.read accounting.attachments accounting.attachments.read files files.read assets assets.read projects projects.read payroll.employees payroll.payruns payroll.payslip payroll.timesheets payroll.settings"
 }
-    // REDIRECT_URI = "http://localhost:5000/callback"; // 
+    // REDIRECT_URI : "http://localhost:5000/xero/callback",
+    // REDIRECT_URI : "https://server.certalink.com/certalinkapp/xero/callback",
 
 exports.XERO = XERO;
