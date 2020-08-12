@@ -8,6 +8,20 @@ const cookieSession = require("cookie-session");
 const { response } = require("express");
 let app = express();
 
+let globalXeroData = {
+  data: {
+    status: "Disconnected",
+    header: "Please Connect to Xero",
+  },
+  settings: {
+    url: "https://server.certalink.com/certalinkapp/",
+  },
+  external_link: {
+    url: "https://server.certalink.com/certalinkapp/xero",
+    label: "Connect to Xero",
+  },
+};
+
 app.set("port", process.env.PORT || 5000);
 app.use(express.static(__dirname + "/public"));
 
@@ -36,11 +50,11 @@ lib.Configuration.oAuthClientSecret = config.PIPEDRIVE.SECRET_ID;
 lib.Configuration.oAuthRedirectUri = config.PIPEDRIVE.REDIRECT_URI;
 
 app.get("/", function (req, res) {
-  res.redirect("/certalinkapp/response");
+  res.redirect("/certalinkapp/test");
 });
 
 /** this request is for testing redirect and return value to app panel */
-app.get("/response", async function (req, res) {
+app.get("/test", async function (req, res) {
   /**
    * @Json Strucutre
    * {
@@ -180,7 +194,7 @@ app.get("/contacts", async function (req, res) {
     );
     const data = Contacts.getBalanceData(response.body.contacts);
     console.log("responsedata after formate--->", data);
-    res.json({
+    globalXeroData = {
       data: data,
       settings: {
         url: "https://server.certalink.com/certalinkapp/",
@@ -189,14 +203,15 @@ app.get("/contacts", async function (req, res) {
         url: "https://server.certalink.com/certalinkapp/xero",
         label: "Connect to Xero",
       },
-    });
-  } catch (err) {
-    const balance = {
-      status: "Disconnected",
-      header: "Please Connect to Xero",
     };
-    res.json({
-      data: balance,
+
+    res.render("ok");
+  } catch (err) {
+    globalXeroData = {
+      data: {
+        status: "Disconnected",
+        header: "Please Connect to Xero",
+      },
       settings: {
         url: "https://server.certalink.com/certalinkapp/",
       },
@@ -204,10 +219,12 @@ app.get("/contacts", async function (req, res) {
         url: "https://server.certalink.com/certalinkapp/xero",
         label: "Connect to Xero",
       },
-    });
+    };
   }
 });
-
+app.get("/response", function (req, res) {
+  res.json(globalXeroData);
+});
 app.get("/error", function (req, res) {
   try {
     res.send('<a href="/">Try again</a>');
