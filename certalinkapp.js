@@ -205,7 +205,7 @@ app.get("/contacts", async function (req, res) {
       },
     };
 
-    res.render("ok");
+    res.json(globalXeroData);
   } catch (err) {
     globalXeroData = {
       data: {
@@ -220,6 +220,7 @@ app.get("/contacts", async function (req, res) {
         label: "Connect to Xero",
       },
     };
+    res.json(globalXeroData);
   }
 });
 app.get("/response", function (req, res) {
