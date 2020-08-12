@@ -148,6 +148,13 @@ class Contacts {
     }
     const contact = contactList[0];
     if (contact.balances) {
+      balance.organization = "Certa Pty Ltd";
+      balance.company_name = "Apex Wiring Solutions Pty Ltd"
+       /** check if the payable info exist in json */
+       if (contact.balances.accountsReceivable) {
+        balance.receivable_outstand = contact.balances.accountsReceivable.outstanding;
+        balance.receivable_overdue = contact.balances.accountsReceivable.overdue;
+      }
       /** check if the payable info exist in json */
       console.log("contact.balances", contact.balances);
       if (contact.balances.accountsPayable) {
@@ -158,11 +165,7 @@ class Contacts {
         balance.payable_outstand = contact.balances.accountsPayable.outstanding;
         balance.payable_overdue = contact.balances.accountsPayable.overdue;
       }
-      /** check if the payable info exist in json */
-      if (contact.balances.accountsReceivable) {
-        balance.receivable_outstand = contact.balances.accountsReceivable.outstanding;
-        balance.receivable_overdue = contact.balances.accountsReceivable.overdue;
-      }
+     
     }
     return  balance;
   }

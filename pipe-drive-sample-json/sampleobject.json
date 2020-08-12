@@ -4,6 +4,7 @@
     "status"
   ],
   "properties": {
+   
     "status": {
       "$ref": "#/definitions/text"
     },
@@ -11,29 +12,23 @@
       "$ref": "#/definitions/header"
     },
     "organization": {
-      "label":"Organization",
       "$ref": "#/definitions/text"
     },
     "company_name": {
-      "label":"Company",
       "$ref": "#/definitions/text"
     },
-    
     "receivable_outstand": {
-      "label": "Receivable Outstand",
       "$ref": "#/definitions/text"
     },
     "receivable_overdue": {
-      "label": "Receivable Overdue",
       "$ref": "#/definitions/text"
     },
     "payable_outstand": {
-      "label": "Payable Outstand",
       "$ref": "#/definitions/text"
     },
     "payable_overdue": {
-      "label": "Payable Overdue",
       "$ref": "#/definitions/text"
     }
+    
   }
 }
