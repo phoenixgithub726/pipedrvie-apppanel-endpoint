@@ -17,8 +17,9 @@
     "company_name": {
       "$ref": "#/definitions/text"
     },
+    
     "receivable_outstand": {
-      "$ref": "#/definitions/email"
+      "$ref": "#/definitions/text"
     },
     "receivable_overdue": {
       "$ref": "#/definitions/text"

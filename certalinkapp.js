@@ -67,13 +67,20 @@ app.get("/response", async function (req, res) {
    *  Sample pipedrive app panel Json data structure
       Sample Response
    */
+
   const response = {
-    data: [
-      { header: "AccountsReceivable", oustand: "1540.0", overdue: "1540.0" },
-      { header: "AccountsPayable", oustand: "0.0", overdue: "0.0" },
-    ],
+    data: {
+      status: "Disconnected",
+      header: "Please Connect to Xero",
+      organization: "select by user",
+      company_name: "test company",
+      receivable_outstand: "13212",
+      receivable_overdue: "35",
+      payable_outstand: "3459",
+      payable_overdue: "8203",
+    },
     settings: {
-      url: "https://server.certalink.com/",
+      url: "https://server.certalink.com/certalinkapp/",
     },
     external_link: {
       url: "https://server.certalink.com/certalinkapp/xero",
@@ -126,14 +133,23 @@ app.get("/xero", async function (req, res, next) {
       status: "Disconnected",
       header: "Please Connect to Xero",
     };
-    res.json({ data: balance });
+
+    res.json({
+      data: balance,
+      settings: {
+        url: "https://server.certalink.com/certalinkapp/",
+      },
+      external_link: {
+        url: "https://server.certalink.com/certalinkapp/xero",
+        label: "See more data",
+      },
+    });
   }
 });
 app.get("/xero/callback", async function (req, res, next) {
   // app.get("/callback", async function (req, res, next) {
   try {
     const tokenSet = await xero.apiCallback(req.url);
-
     req.session.tokenSet = tokenSet;
     await xero.updateTenants();
     // req.session.xeroTenantId = xero.tenantIds[0];
@@ -164,13 +180,31 @@ app.get("/contacts", async function (req, res) {
     );
     const data = Contacts.getBalanceData(response.body.contacts);
     console.log("responsedata after formate--->", data);
-    res.json(data);
+    res.json({
+      data: data,
+      settings: {
+        url: "https://server.certalink.com/ceretalinkapp/",
+      },
+      external_link: {
+        url: "https://server.certalink.com/ceretalinkapp/xero",
+        label: "Connect to Xero",
+      },
+    });
   } catch (err) {
     const balance = {
       status: "Disconnected",
       header: "Please Connect to Xero",
     };
-    res.json({ data: balance });
+    res.json({
+      data: balance,
+      settings: {
+        url: "https://server.certalink.com/ceretalinkapp/",
+      },
+      external_link: {
+        url: "https://server.certalink.com/ceretalinkapp/xero",
+        label: "Connect to Xero",
+      },
+    });
   }
 });
 

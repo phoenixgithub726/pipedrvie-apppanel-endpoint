@@ -164,7 +164,7 @@ class Contacts {
         balance.receivable_overdue = contact.balances.accountsReceivable.overdue;
       }
     }
-    return { data: balance };
+    return  balance;
   }
 }
 
