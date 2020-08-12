@@ -183,10 +183,10 @@ app.get("/contacts", async function (req, res) {
     res.json({
       data: data,
       settings: {
-        url: "https://server.certalink.com/ceretalinkapp/",
+        url: "https://server.certalink.com/certalinkapp/",
       },
       external_link: {
-        url: "https://server.certalink.com/ceretalinkapp/xero",
+        url: "https://server.certalink.com/certalinkapp/xero",
         label: "Connect to Xero",
       },
     });
@@ -198,10 +198,10 @@ app.get("/contacts", async function (req, res) {
     res.json({
       data: balance,
       settings: {
-        url: "https://server.certalink.com/ceretalinkapp/",
+        url: "https://server.certalink.com/certalinkapp/",
       },
       external_link: {
-        url: "https://server.certalink.com/ceretalinkapp/xero",
+        url: "https://server.certalink.com/certalinkapp/xero",
         label: "Connect to Xero",
       },
     });
