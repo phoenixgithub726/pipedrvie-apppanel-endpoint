@@ -47,7 +47,7 @@
  * Sample Input Json Data
  */
 
-'use strict';
+"use strict";
 const contacts = {
   contactID: "bc80f243-9443-4fda-8704-41f94790d8f1",
   accountNumber: "CUST100",
@@ -134,31 +134,37 @@ class Contacts {
    *
    */
   static getBalanceData(contactList) {
-    const balances = [
-      { header: "AccountsPayable", oustand: "Connection Failed", overdue: "Connection Failed" },
-      { header: "AccountsReceivable", oustand: "Connection Failed", overdue: "Connection Failed" },
-    ];
-
-    if(contactList.length == 0) {
-      console.error("No contact list")
-      return ({data:balances});
+    // const balances = [
+    //   { header: "AccountsPayable", oustand: "Connection Failed", overdue: "Connection Failed" },
+    //   { header: "AccountsReceivable", oustand: "Connection Failed", overdue: "Connection Failed" },
+    // ];
+    const balance = {
+      status: "Connected",
+      header: "Refresh Token to Update the Data"
+    };
+    if (contactList.length == 0) {
+      console.error("No contact list");
+      return { data: balance };
     }
-    const contact = contactList[0]
-    if( contact.balances){
+    const contact = contactList[0];
+    if (contact.balances) {
       /** check if the payable info exist in json */
-      console.log("contact.balances",contact.balances)
-      if(contact.balances.accountsPayable){
-        console.log("response.balances.accountsPayable.outstanding",contact.balances.accountsPayable.outstanding)
-        balances[0].oustand = contact.balances.accountsPayable.outstanding;
-        balances[0].overdue = contact.balances.accountsPayable.overdue;
+      console.log("contact.balances", contact.balances);
+      if (contact.balances.accountsPayable) {
+        console.log(
+          "response.balances.accountsPayable.outstanding",
+          contact.balances.accountsPayable.outstanding
+        );
+        balance.payable_outstand = contact.balances.accountsPayable.outstanding;
+        balance.payable_overdue = contact.balances.accountsPayable.overdue;
       }
       /** check if the payable info exist in json */
-      if(contact.balances.accountsReceivable){
-        balances[1].oustand = contact.balances.accountsReceivable.outstanding;
-        balances[1].overdue = contact.balances.accountsReceivable.overdue;
+      if (contact.balances.accountsReceivable) {
+        balance.receivable_outstand = contact.balances.accountsReceivable.outstanding;
+        balance.receivable_overdue = contact.balances.accountsReceivable.overdue;
       }
     }
-    return ({data:balances});
+    return { data: balance };
   }
 }
 

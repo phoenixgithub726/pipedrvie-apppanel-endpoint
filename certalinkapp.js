@@ -72,13 +72,13 @@ app.get("/response", async function (req, res) {
       { header: "AccountsReceivable", oustand: "1540.0", overdue: "1540.0" },
       { header: "AccountsPayable", oustand: "0.0", overdue: "0.0" },
     ],
-    settings:{
-      url:'https://server.certalink.com/'
+    settings: {
+      url: "https://server.certalink.com/",
     },
-    external_link:{
-      url:'https://server.certalink.com/ceretalinkapp/xero',
-      label:'See more data'
-    }
+    external_link: {
+      url: "https://server.certalink.com/certalinkapp/xero",
+      label: "See more data",
+    },
   };
   console.log(response);
   res.json(response);
@@ -102,7 +102,6 @@ app.get("/pipedrive/callback", function (req, res, next) {
   );
 });
 
-
 const xero_node = require("xero-node");
 const xero = new xero_node.XeroClient({
   clientId: config.XERO.CLIENT_ID,
@@ -111,58 +110,34 @@ const xero = new xero_node.XeroClient({
   scopes: config.XERO.SCOPE.split(" "),
 });
 
-const Contacts = require('./utils/contacts');
+const Contacts = require("./utils/contacts");
 
 app.get("/xero", async function (req, res, next) {
   try {
-    let consentUrl = await xero.buildConsentUrl();
-    // consentUrl.gotOptions.retry.maxRetryAfter = 10000;
-    // consentUrl.gotOptions.gotTimeout.request = 10000;
-
-    console.log("constentURL--->", consentUrl);
-    res.redirect(consentUrl);
-
-    // let data = Contacts.getBalanceData("")
-    // console.log("response data after formate--->", data)
-    // res.json(data)
+    if (req.session.tokenSet) {
+      res.redirect("/certalinkapp/contacts");
+    } else {
+      let consentUrl = await xero.buildConsentUrl();
+      console.log("constentURL--->", consentUrl);
+      res.redirect(consentUrl);
+    }
   } catch (err) {
-    let balances = [
-      { header: "AccountsReceivable", oustand: "Failed in Xero Page", overdue: "Failed in Xero Page" },
-      { header: "AccountsReceivable", oustand: "Connection Failed", overdue: "Connection Failed" },
-    ];
-    res.json({data:balances})
-    // res.send("Sorry, something went wrong");
+    const balance = {
+      status: "Disconnected",
+      header: "Please Connect to Xero",
+    };
+    res.json({ data: balance });
   }
 });
 app.get("/xero/callback", async function (req, res, next) {
-// app.get("/callback", async function (req, res, next) {
+  // app.get("/callback", async function (req, res, next) {
   try {
-    /**
-       *Call apiCallback function with the response url which returns a tokenSet
-        you can save in your datastore for future calls.
-        The tokenSet can also be accessed from the client as xero.readTokenSet()
-       */
-    let tokenSet = await xero.apiCallback(req.url);
-    // console.log("tokenset", tokenSet);
-    const accessToken = await xero.readTokenSet();
-    // console.log("accessToken", accessToken);
-    // accessToken and tokenSet is same
+    const tokenSet = await xero.apiCallback(req.url);
 
     req.session.tokenSet = tokenSet;
-    req.session.accessToken = accessToken;
-    // console.log("accessToken", accessToken);
-    /**
- *  the updatedTenants function
-    will query & nest the additional orgData results
-    in your xeroClient under each connection/tenant object
-    and return the array of tenants.
-    This requires accounting.settings scope because
-    updateTenants calls the organisation endpoint.
- */
     await xero.updateTenants();
     // req.session.xeroTenantId = xero.tenantIds[0];
-    req.session.xeroTenantId = xero.tenantIds;
-
+    req.session.tokenSet = xero.tokenSet;
     res.redirect("/certalinkapp/contacts");
   } catch (error) {
     console.error(error);
@@ -178,33 +153,24 @@ app.get("/xero/callback", async function (req, res, next) {
 /**
  * Get Contacts From Xero
  */
-
-
 app.get("/contacts", async function (req, res) {
   try {
-    req.session.allTenants = xero._tenants;
-    req.session.activeTenant = xero._tenants[0];
-    // const response = await xero.accountingApi.getContacts(
-    //   xero._tenants[0].tenantId
-    // );
+    await xero.setTokenSet(req.session.tokenSet);
+    await xero.updateTenants();
     const response = await xero.accountingApi.getContacts(
-      xero._tenants[0].tenantId, undefined,  'name = "Apex Wiring Solutions Pty Ltd"'
+      xero._tenants[0].tenantId,
+      undefined,
+      'name = "Apex Wiring Solutions Pty Ltd"'
     );
-    console.log("_tenants[0]", xero._tenants[0].tenantName)
-
-    const data = Contacts.getBalanceData(response.body.contacts)
-    console.log("responsedata before formate--->", response.body.contacts)
-    console.log("responsedata after formate--->", data)
-    res.json(data)
-    // res.json({_tenants:xero._tenants[0], contacts: response.body});
+    const data = Contacts.getBalanceData(response.body.contacts);
+    console.log("responsedata after formate--->", data);
+    res.json(data);
   } catch (err) {
-    let balances = [
-      { header: "AccountsReceivable", oustand: "Failed in AccountingApi", overdue: "Failed in AccountingApi" },
-      { header: "AccountsReceivable", oustand: "Connection Failed", overdue: "Connection Failed" },
-    ];
-    res.json({data:balances})
-
-    // res.send("Sorry, something went wrong");
+    const balance = {
+      status: "Disconnected",
+      header: "Please Connect to Xero",
+    };
+    res.json({ data: balance });
   }
 });
 
@@ -222,5 +188,5 @@ app.listen(PORT, function () {
     "Your PiepDrive EndPoint basic public app is running at :" + PORT
   );
 });
-var timeout = require('connect-timeout'); //express v4
+var timeout = require("connect-timeout"); //express v4
 app.use(timeout(12000));
