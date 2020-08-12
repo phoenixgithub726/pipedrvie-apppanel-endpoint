@@ -72,6 +72,13 @@ app.get("/response", async function (req, res) {
       { header: "AccountsReceivable", oustand: "1540.0", overdue: "1540.0" },
       { header: "AccountsPayable", oustand: "0.0", overdue: "0.0" },
     ],
+    settings:{
+      url:'https://server.certalink.com/'
+    },
+    external_link:{
+      url:'https://server.certalink.com/ceretalinkapp/xero',
+      label:'See more data'
+    }
   };
   console.log(response);
   res.json(response);
@@ -145,12 +152,12 @@ app.get("/xero/callback", async function (req, res, next) {
     req.session.accessToken = accessToken;
     // console.log("accessToken", accessToken);
     /**
- *      the updatedTenants function
-        will query & nest the additional orgData results
-        in your xeroClient under each connection/tenant object
-        and return the array of tenants.
-        This requires accounting.settings scope because
-        updateTenants calls the organisation endpoint.
+ *  the updatedTenants function
+    will query & nest the additional orgData results
+    in your xeroClient under each connection/tenant object
+    and return the array of tenants.
+    This requires accounting.settings scope because
+    updateTenants calls the organisation endpoint.
  */
     await xero.updateTenants();
     // req.session.xeroTenantId = xero.tenantIds[0];
