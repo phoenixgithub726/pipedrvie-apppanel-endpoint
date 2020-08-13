@@ -89,15 +89,14 @@ app.get("/pipedrive/callback", function (req, res, next) {
   );
 });
 
-
+let localhost = "http://localhost:5000/xero/callback"
 const xero_node = require("xero-node");
 const xero = new xero_node.XeroClient({
   clientId: config.XERO.CLIENT_ID,
   clientSecret: config.XERO.SECRET_ID,
-  redirectUris: [config.XERO.REDIRECT_URI],
+  redirectUris: [localhost],
   scopes: config.XERO.SCOPE.split(" "),
 });
-
 const Contacts = require('./utils/contacts');
 
 app.get("/xero", async function (req, res, next) {

@@ -18,16 +18,16 @@
       "$ref": "#/definitions/text"
     },
     "receivable_outstand": {
-      "$ref": "#/definitions/text"
+      "$ref": "#/definitions/numerical"
     },
     "receivable_overdue": {
-      "$ref": "#/definitions/text"
+      "$ref": "#/definitions/numerical"
     },
     "payable_outstand": {
-      "$ref": "#/definitions/text"
+      "$ref": "#/definitions/numerical"
     },
     "payable_overdue": {
-      "$ref": "#/definitions/text"
+      "$ref": "#/definitions/numerical"
     }
     
   }
